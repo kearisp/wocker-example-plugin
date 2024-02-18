@@ -28,6 +28,10 @@
         "@wocker/core": "^1.0.4"
     },
     "devDependencies": {
+        "@wocker/ws": "*",
         "typescript": "^5.3.3"
+    },
+    "peerDependencies": {
+        "@wocker/ws": "^1.0.4"
     }
 }

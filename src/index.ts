@@ -1,10 +1,10 @@
+import {Cli} from "@wocker/core";
 import {
     Injectable,
     DockerService,
     ProjectService,
-    Cli,
     Plugin
-} from "@wocker/core";
+} from "@wocker/ws";
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export default class ExamplePlugin extends Plugin {
         protected dockerService: DockerService,
         protected projectService: ProjectService
     ) {
-        super();
+        super("example");
     }
 
     public install(cli: Cli) {
