@@ -1,0 +1,37 @@
+{
+    "name": "@wocker/example-plugin",
+    "version": "1.0.0",
+    "author": "Kris Papercut <krispcut@gmail.com>",
+    "description": "Wocker example plugin",
+    "license": "MIT",
+    "keywords": [
+        "wocker",
+        "plugin"
+    ],
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "homepage": "https://kearisp.github.io/wocker/plugins/custom",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kearisp/wocker-example-plugin.git"
+    },
+    "bugs": {
+        "url": "https://github.com/kearisp/wocker-example-plugin/issues"
+    },
+    "scripts": {
+        "prepare": "npm run build",
+        "watch": "tsc -w",
+        "build": "tsc",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "@wocker/core": "^1.0.4"
+    },
+    "devDependencies": {
+        "@wocker/ws": "*",
+        "typescript": "^5.3.3"
+    },
+    "peerDependencies": {
+        "@wocker/ws": "^1.0.4"
+    }
+}
