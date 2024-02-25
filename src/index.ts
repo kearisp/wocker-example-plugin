@@ -24,6 +24,6 @@ export default class ExamplePlugin extends Plugin {
     public async init() {
         const project = await this.projectService.get();
 
-        return `Current project: ${project.name}\n`;
+        return `Current project: ${project.name} (${project.containerName})\n`;
     }
 };
