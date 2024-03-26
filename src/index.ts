@@ -1,29 +1,10 @@
-import {Cli} from "@wocker/core";
-import {
-    Injectable,
-    DockerService,
-    ProjectService,
-    Plugin
-} from "@wocker/ws";
+import {Module} from "@wocker/core";
+
+import {ExampleController} from "./controllers/ExampleController";
 
 
-@Injectable()
-export default class ExamplePlugin extends Plugin {
-    public constructor(
-        protected dockerService: DockerService,
-        protected projectService: ProjectService
-    ) {
-        super("example");
-    }
-
-    public install(cli: Cli) {
-        cli.command("test:init")
-            .action(() => this.init());
-    }
-
-    public async init() {
-        const project = await this.projectService.get();
-
-        return `Current project: ${project.name} (${project.containerName})\n`;
-    }
-};
+@Module({
+    name: "example",
+    controllers: [ExampleController]
+})
+export default class ExamplePlugin {}
