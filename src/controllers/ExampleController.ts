@@ -3,25 +3,27 @@ import {
     Command,
     Option,
     DockerService,
-    ProjectService
+    ProjectService,
+    PluginConfigService
 } from "@wocker/core";
 
 
 @Controller()
 export class ExampleController {
     public constructor(
-        protected dockerService: DockerService,
-        protected projectService: ProjectService
+        protected readonly dockerService: DockerService,
+        protected readonly projectService: ProjectService,
+        protected readonly pluginConfigService: PluginConfigService
     ) {}
 
-    @Command("test:init")
+    @Command("example")
     public async init(
         @Option("name", {
             type: "string",
             alias: "n"
         })
         name?: string
-    ) {
+    ): Promise<string> {
         if(name) {
             await this.projectService.cdProject(name);
         }
