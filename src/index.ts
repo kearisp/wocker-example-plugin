@@ -1,10 +1,13 @@
-import {Module} from "@wocker/core";
+import {Plugin, PluginConfigService} from "@wocker/core";
 
 import {ExampleController} from "./controllers/ExampleController";
 
 
-@Module({
+@Plugin({
     name: "example",
-    controllers: [ExampleController]
+    controllers: [ExampleController],
+    providers: [
+        PluginConfigService
+    ]
 })
 export default class ExamplePlugin {}
