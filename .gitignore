@@ -4,8 +4,6 @@
 
 # Local data
 /lib
-/dist
-/dist-ts
 
 # dotenv environment variables file
 .env
@@ -14,6 +12,7 @@
 # Dependency directories
 node_modules/
 jspm_packages/
+package-lock.json
 
 # Optional npm cache directory
 .npm
