@@ -37,3 +37,19 @@ jobs:
               env:
                 NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
               run: npm publish
+
+    unpublish:
+        runs-on: ubuntu-latest
+        environment: publish
+        steps:
+          - name: Unpublish previous dev versions
+            env:
+                NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+                run: |
+                    PACKAGE_NAME=$(npm pkg get name | sed -e 's/^"//' -e 's/"$//')
+                    PACKAGE_VERSION=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//')
+                    DEV_VERSIONS=$(npm view $PACKAGE_NAME versions --json | jq -r '.[]' | grep -E "$PACKAGE_VERSION-dev\.[0-9]+$")
+
+                    for VERSION in $DEV_VERSIONS; do
+                        npm unpublish $PACKAGE_NAME@$VERSION --force
+                    done
