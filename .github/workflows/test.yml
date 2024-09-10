@@ -35,3 +35,46 @@ jobs:
 
             - name: Install dependencies
               run: npm install
+
+    publish:
+        needs: test
+        run-on: ubuntu-latest
+        environment: publish
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 20
+                registry-url: 'https://registry.npmjs.org'
+
+            - name: Cache dependencies
+              uses: actions/cache@v3
+              with:
+                path: ~/.npm
+                key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+                restore-keys: |
+                  ${{ runner.os }}-npm-
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Build
+              run: npm run build
+
+            - name: Publish to NPM
+              env:
+                NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+              run: |
+                PACKAGE_NAME=$(npm pkg get name | sed -e 's/^"//' -e 's/"$//')
+                PACKAGE_VERSION=$(npm pkg get version | sed -e 's/^"//' -e 's/"$//')
+                PUBLISHED_VERSION=$(npm view $PACKAGE_NAME@dev version 2>/dev/null || echo "")
+                if [[ "$PUBLISHED_VERSION" == "$PACKAGE_VERSION"* ]]; then
+                    INDEX=$(echo $PUBLISHED_VERSION | sed -r -e 's/^[0-9]+\.[0-9]+\.[0-9]+-dev\.//')
+                else
+                    INDEX=0
+                fi
+                npm pkg set version=$PACKAGE_VERSION-dev.$INDEX
+                npm publish --tag dev
