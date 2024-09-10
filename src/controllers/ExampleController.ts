@@ -32,4 +32,4 @@ export class ExampleController {
 
         return `Current project: ${project.name} (${project.containerName})\n`;
     }
-};
+}
