@@ -1,19 +1,16 @@
 import {
     Controller,
     Command,
-    Option,
-    DockerService,
-    ProjectService,
-    PluginConfigService
+    Option
 } from "@wocker/core";
+
+import {ExampleService} from "../services/ExampleService";
 
 
 @Controller()
 export class ExampleController {
     public constructor(
-        protected readonly dockerService: DockerService,
-        protected readonly projectService: ProjectService,
-        protected readonly pluginConfigService: PluginConfigService
+        protected readonly exampleService: ExampleService
     ) {}
 
     @Command("example")
@@ -24,12 +21,6 @@ export class ExampleController {
         })
         name?: string
     ): Promise<string> {
-        if(name) {
-            await this.projectService.cdProject(name);
-        }
-
-        const project = await this.projectService.get();
-
-        return `Current project: ${project.name} (${project.containerName})\n`;
+        return this.exampleService.init(name);
     }
 }
