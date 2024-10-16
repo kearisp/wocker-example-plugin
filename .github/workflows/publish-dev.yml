@@ -1,4 +1,4 @@
-name: Test and Publish dev
+name: Publish dev
 
 on:
     pull_request:
@@ -15,9 +15,12 @@ jobs:
     test:
         runs-on: ubuntu-latest
         environment: publish
+        permissions:
+            contents: read
+            id-token: write
         steps:
           - name: Checkout code
-            uses: actions/checkout@v3
+            uses: actions/checkout@v4
 
           - name: Set up Node.js
             uses: actions/setup-node@v4
@@ -38,7 +41,7 @@ jobs:
                 npm pkg set version=$PACKAGE_VERSION-dev.$INDEX
 
           - name: Cache dependencies
-            uses: actions/cache@v3
+            uses: actions/cache@v4
             with:
                 path: ~/.npm
                 key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
@@ -55,4 +58,4 @@ jobs:
             env:
                 NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
             run: |
-                npm publish --tag dev
+                npm publish --provenance --tag dev
