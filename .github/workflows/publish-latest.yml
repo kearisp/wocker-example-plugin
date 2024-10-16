@@ -42,10 +42,11 @@ jobs:
                 NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
             run: npm publish --provenance
 
-    unpublish:
+    unpublish-dev:
         name: Unpublish dev versions
         runs-on: ubuntu-latest
         environment: publish
+        needs: publish
         steps:
           - name: Checkout code
             uses: actions/checkout@v4
