@@ -7,6 +7,8 @@ on:
 
 jobs:
     unpublish:
+        name: Unpublish version
+        if: ${{ github.repository_owner == 'kearisp' }}
         runs-on: ubuntu-latest
         environment: publish
         steps:
