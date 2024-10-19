@@ -8,6 +8,7 @@ on:
 jobs:
     publish:
         name: Publish latest version
+        if: ${{ github.repository_owner == 'kearisp' }}
         runs-on: ubuntu-latest
         environment: publish
         permissions:
@@ -44,6 +45,7 @@ jobs:
 
     unpublish-dev:
         name: Unpublish dev versions
+        if: ${{ github.repository_owner == 'kearisp' }}
         runs-on: ubuntu-latest
         environment: publish
         needs: publish
