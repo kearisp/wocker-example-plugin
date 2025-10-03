@@ -24,13 +24,12 @@
         "build": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "dependencies": {
-        "@wocker/core": "^1.0.25"
-    },
     "devDependencies": {
+        "@wocker/core": "^1.0.25",
         "typescript": "^5.5.4"
     },
     "peerDependencies": {
-        "@wocker/ws": "1.0.24"
+        "@wocker/core": "^1.0.25",
+        "@wocker/ws": "^1.0.25"
     }
 }
