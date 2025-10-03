@@ -27,9 +27,5 @@
     "devDependencies": {
         "@wocker/core": "^1.0.25",
         "typescript": "^5.5.4"
-    },
-    "peerDependencies": {
-        "@wocker/core": "^1.0.25",
-        "@wocker/ws": "^1.0.25"
     }
 }
