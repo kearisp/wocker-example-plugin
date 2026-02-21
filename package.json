@@ -8,8 +8,8 @@
         "wocker",
         "plugin"
     ],
-    "main": "./lib/index.js",
-    "types": "./lib/index.d.ts",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "homepage": "https://kearisp.github.io/wocker/plugins/custom",
     "repository": {
         "type": "git",
@@ -24,8 +24,10 @@
         "build": "tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
+    "dependencies": {
+        "@wocker/core": "^1.0.30"
+    },
     "devDependencies": {
-        "@wocker/core": "^1.0.25",
-        "typescript": "^5.5.4"
+        "typescript": "^5.9.3"
     }
 }
